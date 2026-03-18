@@ -15,14 +15,10 @@ import BottomNavigationBar from '@/components/BottomNavigationBar.vue'
 
 <style lang="scss" scoped>
 .app-container {
-    padding-left: 16px;
-    padding-right: 16px;
-    max-width: 767px;
+    max-width: 414px;
     margin: 0 auto;
     main {
-        width: 100%;
-        min-height: calc(100vh - 60px);
-        background-color: grey;
+        height: calc(100vh - 60px);
     }
 }
 </style>
