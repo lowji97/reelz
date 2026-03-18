@@ -1,0 +1,64 @@
+.toastify {
+    padding: 10px 15px 10px 41px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-weight: 300;
+    opacity: 0.5;
+    font-size: 13px;
+    line-height: 1.4;
+    @media screen and (max-width: 767px) {
+        max-width: calc(100% - 32px);
+    }
+    &::before {
+        content: '';
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        position: absolute;
+        left: 15px;
+        top: 11px;
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+}
+.toast-success {
+    background: #21351a;
+    border-color: #9fe878;
+    color: #9fe878;
+    &::before {
+        background-image: url('@/assets/images/success-icon.svg');
+    }
+}
+.toast-error {
+    background: #680f0f;
+    border-color: #ffcaca;
+    color: #ffcaca;
+    &::before {
+        background-image: url('@/assets/images/error-icon.svg');
+    }
+}
+.toast-warning {
+    background: #4f1a2a;
+    border-color: #fd8565;
+    color: #fd8565;
+    &::before {
+        background-image: url('@/assets/images/warning-icon.svg');
+    }
+}
+.toast-info {
+    background: #470b64;
+    border-color: #de8aff;
+    color: #de8aff;
+    &::before {
+        background-image: url('@/assets/images/info-icon.svg');
+    }
+}
+.toast-loading {
+    background: #454039;
+    border-color: #f7f1e9;
+    color: #f7f1e9;
+    &::before {
+        background-image: url('@/assets/images/loading-icon.svg');
+    }
+}
