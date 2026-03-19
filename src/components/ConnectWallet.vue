@@ -249,7 +249,7 @@ function shortenAddress(address?: string): string {
 <style lang="scss" scoped>
 #connect-wallet {
     #connect-button {
-        background-color: #ff77c9;
+        background-color: #fff;
         border: unset;
         border-radius: 4px;
         height: 28px;
@@ -265,8 +265,8 @@ function shortenAddress(address?: string): string {
     .connected-wrapper {
         .drawer-toggle {
             display: none;
-            background-color: #ffc2e1;
-            border: 1px solid #ff77c9;
+            background-color: #fff;
+            border: 1px solid #fff;
             border-radius: 6px;
             height: 28px;
             width: 28px;
@@ -305,7 +305,7 @@ function shortenAddress(address?: string): string {
                 height: 28px;
                 font-size: 12px;
                 .network-name {
-                    color: #ff77c9;
+                    color: #fff;
                     font-weight: 500;
                 }
                 @media screen and (max-width: 767px) {
@@ -318,7 +318,7 @@ function shortenAddress(address?: string): string {
                 display: flex;
                 align-items: center;
                 gap: 4px;
-                border: 1px solid #ff77c9;
+                border: 1px solid #fff;
                 padding: 0 8px;
                 border-radius: 4px;
                 height: 28px;
@@ -329,7 +329,7 @@ function shortenAddress(address?: string): string {
                     border-radius: 99px;
                 }
                 .balance-amount {
-                    color: #ff77c9;
+                    color: #fff;
                 }
                 @media screen and (max-width: 767px) {
                     padding: 0;
@@ -338,7 +338,7 @@ function shortenAddress(address?: string): string {
             }
 
             .wallet-address {
-                background-color: #ffc2e1;
+                background-color: #fff;
                 color: #322312;
                 padding: 0 8px;
                 border-radius: 4px;
