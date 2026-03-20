@@ -11,10 +11,6 @@ import BottomNavigationBar from '@/components/BottomNavigationBar.vue'
                 <h1 class="logo">Reelz</h1>
                 <connectWallet />
             </div>
-            <div class="sub">
-                <a class="active">Following</a>
-                <a>For You</a>
-            </div>
         </header>
         <main>
             <RouterView />
@@ -28,6 +24,7 @@ import BottomNavigationBar from '@/components/BottomNavigationBar.vue'
     position: relative;
     max-width: 414px;
     margin: 0 auto;
+    background: #fff;
     header {
         position: absolute;
         top: 0;
@@ -35,13 +32,13 @@ import BottomNavigationBar from '@/components/BottomNavigationBar.vue'
         transform: translateX(-50%);
         z-index: 1;
         width: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
         .main {
             height: 40px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 0 16px;
-            background: rgba(0, 0, 0, 0.5);
 
             .logo {
                 font-size: 20px;
@@ -49,25 +46,9 @@ import BottomNavigationBar from '@/components/BottomNavigationBar.vue'
                 color: #fff;
             }
         }
-        .sub {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            padding: 16px;
-            a {
-                color: #fff;
-                opacity: 0.6;
-                mix-blend-mode: difference;
-                &.active {
-                    opacity: 1;
-                    font-weight: 700;
-                }
-            }
-        }
     }
     main {
-        height: calc(100vh - 100px);
+        height: calc(100vh - 60px);
     }
 }
 </style>

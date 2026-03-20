@@ -1,7 +1,6 @@
 import { useAptosWallet } from '@/composables/useAptosWallet'
 import { createRouter, createWebHistory } from 'vue-router'
 import { useToast } from '@/composables/useToast'
-import Reelz from '@/views/Reelz.vue'
 
 const toast = useToast()
 const router = createRouter({
@@ -10,7 +9,7 @@ const router = createRouter({
         {
             path: '/',
             name: 'reelz',
-            component: Reelz,
+            component: import('@/views/Reelz.vue'),
         },
         {
             path: '/:address',

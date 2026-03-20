@@ -1,67 +1,124 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { ShelbyClient } from '@shelby-protocol/sdk/browser'
+import { Network } from '@aptos-labs/ts-sdk'
 
-const router = useRouter()
+const shelbyClient = new ShelbyClient({
+    network: Network.TESTNET as any,
+    apiKey: 'aptoslabs_ByNsZA8N5ei_FLzhZb7TaQKK1Y3M3XFPGUnL2J8PaHbBc',
+})
+
+const videos = ref<string[]>([])
+
+const handleFindBlob = async (walletAddress: string, keyword: string): Promise<string | null> => {
+    try {
+        const blobs = await shelbyClient.coordination.getAccountBlobs({
+            account: walletAddress as any,
+        })
+        const foundBlob = blobs.find((b) => b.name.includes(keyword))
+
+        if (!foundBlob) return null
+
+        const blobName = foundBlob.name
+        const suffixMatch = blobName.match(/\/(reelz\/.+)$/)
+        const result = suffixMatch?.[1] ?? null
+
+        return result
+    } catch (error) {
+        console.error('Error finding blob:', error)
+        return null
+    }
+}
+
+const _handlLoadVideo = async (walletAddress: string) => {
+    if (!walletAddress) return
+
+    try {
+        const keywords = ['demo1', 'demo2']
+        const foundUrls: string[] = []
+
+        for (const k of keywords) {
+            const blobName = await handleFindBlob(walletAddress, `reelz/uploads/videos/${k}`)
+            console.log('Found blob name for', k, blobName)
+            if (blobName) {
+                const videoUrl = `https://api.testnet.shelby.xyz/shelby/v1/blobs/${walletAddress}/${blobName}`
+                foundUrls.push(videoUrl)
+            } else {
+                console.warn(`No blob found for ${k}`)
+            }
+        }
+
+        // update reactive videos array so template renders them
+        videos.value = foundUrls
+    } catch (error) {
+        console.error('Error loading videos:', error)
+    }
+}
+
+onMounted(() => {
+    const demoWalletAddress = '0xe3c89c5a808a5501110bfa0bc955c49ec29c95bf853ca2948f860ff27771cc06'
+    _handlLoadVideo(demoWalletAddress)
+})
 </script>
 
 <template>
-    <div class="scroller">
-        <div class="reel-container">
-            <video src="@/assets/images/demo1.mp4" autoplay loop muted playsinline></video>
-            <div class="reel-overlay">
-                <div class="reel-bottom">
-                    <div class="reel-content">
-                        <p class="handle">@karennne · 1-28</p>
-                        <div class="tags">
-                            <span>#avicii</span>
-                            <span>#wflove</span>
+    <div class="container">
+        <template v-if="videos.length">
+            <div v-for="(src, idx) in videos" :key="idx" class="reelz">
+                <video :src="src" autoplay loop muted playsinline></video>
+                <div class="overlay">
+                    <div class="bottom">
+                        <div class="content">
+                            <p class="handle">@karennne · 1-28</p>
+                            <div class="tags">
+                                <span>#avicii</span>
+                                <span>#wflove</span>
+                            </div>
+                            <div class="music">
+                                <svg viewBox="0 0 24 24" fill="currentColor" class="music-icon">
+                                    <path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z" />
+                                </svg>
+                                <span class="music-title">Avicii - Waiting For Love (ft.</span>
+                            </div>
                         </div>
-                        <div class="music">
-                            <svg viewBox="0 0 24 24" fill="currentColor" class="music-icon">
-                                <path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z" />
-                            </svg>
-                            <span class="music-title">Avicii - Waiting For Love (ft.</span>
+                        <div class="actions">
+                            <div class="avatar-wrap">
+                                <img
+                                    class="avatar"
+                                    src="https://i.pravatar.cc/80?img=47"
+                                    alt="avatar"
+                                />
+                                <div class="follow-btn">+</div>
+                            </div>
+                            <button class="action-btn">
+                                <img src="@/assets/images/heart-icon.svg" alt="like" />
+                                <span>4445</span>
+                            </button>
+                            <button class="action-btn">
+                                <img src="@/assets/images/message-icon.svg" alt="message" />
+                                <span>64</span>
+                            </button>
+                            <button class="action-btn">
+                                <img src="@/assets/images/share-icon.svg" alt="share" />
+                                <span>Share</span>
+                            </button>
                         </div>
-                    </div>
-                    <div class="reel-actions">
-                        <div class="avatar-wrap">
-                            <img
-                                class="avatar"
-                                src="https://i.pravatar.cc/80?img=47"
-                                alt="avatar"
-                            />
-                            <div class="follow-btn">+</div>
-                        </div>
-                        <button class="action-btn">
-                            <img src="@/assets/images/heart-icon.svg" alt="like" />
-                            <span>4445</span>
-                        </button>
-                        <button class="action-btn">
-                            <img src="@/assets/images/message-icon.svg" alt="message" />
-                            <span>64</span>
-                        </button>
-                        <button class="action-btn">
-                            <img src="@/assets/images/share-icon.svg" alt="share" />
-                            <span>Share</span>
-                        </button>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="reel-container">
-            <video src="@/assets/images/demo2.mp4" autoplay loop muted playsinline></video>
-        </div>
+        </template>
     </div>
 </template>
 
 <style lang="scss" scoped>
-.scroller {
+.container {
     height: 100%;
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
     scrollbar-width: none;
-
-    .reel-container {
+    background-color: #000;
+    .reelz {
         position: relative;
         height: 100%;
         scroll-snap-align: start;
@@ -72,7 +129,7 @@ const router = useRouter()
             object-fit: cover;
         }
 
-        .reel-overlay {
+        .overlay {
             position: absolute;
             inset: 0;
             display: flex;
@@ -85,7 +142,7 @@ const router = useRouter()
                 transparent 100%
             );
 
-            .reel-bottom {
+            .bottom {
                 width: 100%;
                 display: flex;
                 align-items: flex-end;
@@ -94,7 +151,7 @@ const router = useRouter()
                 gap: 12px;
             }
 
-            .reel-content {
+            .content {
                 flex: 1;
                 min-width: 0;
                 display: flex;
@@ -142,7 +199,7 @@ const router = useRouter()
                 }
             }
 
-            .reel-actions {
+            .actions {
                 display: flex;
                 flex-direction: column;
                 align-items: center;

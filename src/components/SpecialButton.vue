@@ -11,8 +11,8 @@ const props = defineProps<{
 
 const height = computed(() => props.height || '2.5rem')
 const width = computed(() => `calc(${height.value} * 0.3)`)
-const bgColor = computed(() => props.bgColor || '#ff77c9')
-const color = computed(() => props.color || '#ffffff')
+const bgColor = computed(() => props.bgColor || '#ffffff')
+const color = computed(() => props.color || '#000')
 </script>
 
 <template>
