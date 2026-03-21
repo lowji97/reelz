@@ -2,7 +2,7 @@ import { Buffer } from 'buffer'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import '@/assets/style/main.scss'
+import '@/assets/style/main.css'
 
 // Polyfill Buffer for browser (required by @shelby-protocol/sdk)
 ;(globalThis as any).Buffer = Buffer

@@ -1,6 +1,8 @@
-@use 'reset.scss';
-@use 'toast.scss';
+@import 'tailwindcss';
+@import './reset.css';
+@import './toast.css';
 
+/* Fonts and base typography (from main.scss) */
 @font-face {
     font-family: 'GT_Planar';
     src: url('@/assets/fonts/GT-Planar-Light.woff2') format('woff2');

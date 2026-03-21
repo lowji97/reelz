@@ -1,5 +1,5 @@
 {
-    "name": "debio",
+    "name": "reelz",
     "version": "0.0.0",
     "private": true,
     "type": "module",
@@ -15,7 +15,9 @@
         "@aptos-labs/ts-sdk": "^5.2.1",
         "@aptos-labs/wallet-adapter-vue": "^1.0.1",
         "@shelby-protocol/sdk": "^0.2.4",
+        "@tailwindcss/vite": "^4.2.2",
         "buffer": "^6.0.3",
+        "tailwindcss": "^4.2.2",
         "toastify-js": "^1.12.0",
         "vue": "^3.5.26",
         "vue-router": "^4.6.4"
