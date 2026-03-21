@@ -13,19 +13,8 @@ const router = createRouter({
         },
         {
             path: '/:address',
+            name: 'profile',
             component: () => import('@/views/Profile.vue'),
-            beforeEnter: async (to, from, next) => {
-                const wallet = useAptosWallet()
-                while (wallet.isLoading.value) {
-                    await new Promise((r) => setTimeout(r, 50))
-                }
-                if (wallet.connected.value) {
-                    next()
-                } else {
-                    toast.info('Please connect wallet first')
-                    next({ name: 'homepage' })
-                }
-            },
         },
     ],
 })

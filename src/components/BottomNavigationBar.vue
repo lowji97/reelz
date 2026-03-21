@@ -12,7 +12,10 @@ const router = useRouter()
             <span>Home</span>
         </router-link>
         <button class="main-upload">Upload</button>
-        <router-link :to="'/profile'" class="nav-item">
+        <router-link
+            :to="'/0xe3c89c5a808a5501110bfa0bc955c49ec29c95bf853ca2948f860ff27771cc06'"
+            class="nav-item"
+        >
             <img src="@/assets/images/profile-icon.svg" alt="Profile" class="nav-icon" />
             <span>Profile</span>
         </router-link>

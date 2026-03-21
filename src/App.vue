@@ -5,50 +5,16 @@ import BottomNavigationBar from '@/components/BottomNavigationBar.vue'
 </script>
 
 <template>
-    <div class="app-container">
-        <header>
-            <div class="main">
-                <h1 class="logo">Reelz</h1>
-                <connectWallet />
-            </div>
+    <div class="relative max-w-[414px] mx-auto">
+        <header
+            class="absolute top-0 left-1/2 transform -translate-x-1/2 z-10 w-full bg-black/50 backdrop-blur-sm flex items-center justify-between px-4 py-1"
+        >
+            <h1 class="text-2xl font-[GT_Planar] font-bold tracking-wide text-white">Reelz</h1>
+            <connectWallet />
         </header>
-        <main>
+        <main class="h-[calc(100vh-60px)]">
             <RouterView />
         </main>
         <BottomNavigationBar />
     </div>
 </template>
-
-<style lang="scss" scoped>
-.app-container {
-    position: relative;
-    max-width: 414px;
-    margin: 0 auto;
-    background: #fff;
-    header {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 1;
-        width: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        .main {
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 16px;
-
-            .logo {
-                font-size: 20px;
-                font-weight: bold;
-                color: #fff;
-            }
-        }
-    }
-    main {
-        height: calc(100vh - 60px);
-    }
-}
-</style>

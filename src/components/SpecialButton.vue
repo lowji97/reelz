@@ -16,71 +16,35 @@ const color = computed(() => props.color || '#000')
 </script>
 
 <template>
-    <button class="special-button" :disabled="disabled">
-        <div class="button-edge">
+    <button
+        :disabled="disabled"
+        :class="[{ 'opacity-60 cursor-not-allowed': disabled }, 'relative bg-transparent p-0']"
+        :style="{ height: height, paddingRight: width }"
+    >
+        <div class="absolute right-[0.5px] top-0" :style="{ width: width, height: height }">
             <svg
                 width="12"
                 height="40"
                 viewBox="0 0 12 40"
-                fill="#ff77c9"
+                :fill="bgColor"
                 xmlns="http://www.w3.org/2000/svg"
+                class="w-full h-full"
             >
                 <path
                     d="M8 0H0v40h.492a6 6 0 0 0 5.204-3.014l4.712-8.212A12 12 0 0 0 12 22.802V4a4 4 0 0 0-4-4Z"
                 ></path>
             </svg>
         </div>
-        <span>{{ title }}</span>
+        <span
+            class="text-xs flex items-center justify-center font-bold rounded-l-xs h-full"
+            :style="{
+                color: color,
+                backgroundColor: bgColor,
+                paddingLeft: `calc(${width} + 2px)`,
+                paddingRight: '5px',
+            }"
+        >
+            {{ title }}
+        </span>
     </button>
 </template>
-
-<style lang="scss" scoped>
-.special-button {
-    position: relative;
-    border: none;
-    cursor: pointer;
-    padding: 0 v-bind(width) 0 0;
-    background-color: transparent;
-    height: v-bind(height);
-    &:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-    }
-
-    &:hover:not(:disabled) {
-        .button-edge {
-            svg {
-                fill: v-bind(bgColor);
-            }
-        }
-        span {
-            background-color: v-bind(bgColor);
-        }
-    }
-
-    .button-edge {
-        width: v-bind(width);
-        height: v-bind(height);
-        position: absolute;
-        right: 0.5px;
-        top: 0;
-        svg {
-            height: 100%;
-            width: 100%;
-            fill: v-bind(bgColor);
-        }
-    }
-
-    span {
-        color: v-bind(color);
-        display: flex;
-        height: 100%;
-        align-items: center;
-        justify-content: center;
-        font-weight: 700;
-        background-color: v-bind(bgColor);
-        padding: 0 5px 0 calc(v-bind(width) + 5px);
-        border-radius: 0.25rem 0 0 0.25rem;
-    }
-}
-</style>

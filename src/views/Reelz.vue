@@ -63,45 +63,89 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="container">
+    <div class="h-full overflow-y-scroll snap-y snap-mandatory bg-black">
         <template v-if="videos.length">
-            <div v-for="(src, idx) in videos" :key="idx" class="reelz">
-                <video :src="src" autoplay loop muted playsinline></video>
-                <div class="overlay">
-                    <div class="bottom">
-                        <div class="content">
-                            <p class="handle">@karennne · 1-28</p>
-                            <div class="tags">
+            <div v-for="(src, idx) in videos" :key="idx" class="h-full relative snap-start">
+                <video
+                    :src="src"
+                    autoplay
+                    loop
+                    muted
+                    playsinline
+                    class="w-full h-full object-cover"
+                />
+
+                <div
+                    class="absolute inset-0 flex items-end bg-gradient-to-t from-black via-black/50 to-transparent"
+                >
+                    <div class="w-full flex items-end justify-between px-4 pb-5 gap-3">
+                        <div class="flex-1 min-w-0 flex flex-col gap-1 text-white">
+                            <p class="text-sm font-semibold drop-shadow">@karennne · 1-28</p>
+                            <div
+                                class="flex flex-wrap gap-2 text-sm font-semibold drop-shadow text-white/90"
+                            >
                                 <span>#avicii</span>
                                 <span>#wflove</span>
                             </div>
-                            <div class="music">
-                                <svg viewBox="0 0 24 24" fill="currentColor" class="music-icon">
+                            <div
+                                class="flex items-center gap-2 mt-1 text-xs text-white/90 overflow-hidden"
+                            >
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                    class="w-3 h-3 opacity-90"
+                                >
                                     <path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z" />
                                 </svg>
-                                <span class="music-title">Avicii - Waiting For Love (ft.</span>
+                                <span class="text-xs truncate">Avicii - Waiting For Love (ft.</span>
                             </div>
                         </div>
-                        <div class="actions">
-                            <div class="avatar-wrap">
+
+                        <div class="flex flex-col items-center gap-5 flex-shrink-0">
+                            <div class="relative mb-1">
                                 <img
-                                    class="avatar"
+                                    class="w-11 h-11 rounded-full border-2 border-white object-cover"
                                     src="https://i.pravatar.cc/80?img=47"
                                     alt="avatar"
                                 />
-                                <div class="follow-btn">+</div>
+                                <div
+                                    class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-red-500 text-white text-[14px] font-bold flex items-center justify-center"
+                                >
+                                    +
+                                </div>
                             </div>
-                            <button class="action-btn">
-                                <img src="@/assets/images/heart-icon.svg" alt="like" />
-                                <span>4445</span>
+
+                            <button
+                                class="flex flex-col items-center gap-1 bg-transparent border-0 p-0 text-white"
+                            >
+                                <img
+                                    src="@/assets/images/heart-icon.svg"
+                                    alt="like"
+                                    class="w-8 h-8 drop-shadow"
+                                />
+                                <span class="text-xs font-semibold drop-shadow">4445</span>
                             </button>
-                            <button class="action-btn">
-                                <img src="@/assets/images/message-icon.svg" alt="message" />
-                                <span>64</span>
+
+                            <button
+                                class="flex flex-col items-center gap-1 bg-transparent border-0 p-0 text-white"
+                            >
+                                <img
+                                    src="@/assets/images/message-icon.svg"
+                                    alt="message"
+                                    class="w-8 h-8 drop-shadow"
+                                />
+                                <span class="text-xs font-semibold drop-shadow">64</span>
                             </button>
-                            <button class="action-btn">
-                                <img src="@/assets/images/share-icon.svg" alt="share" />
-                                <span>Share</span>
+
+                            <button
+                                class="flex flex-col items-center gap-1 bg-transparent border-0 p-0 text-white"
+                            >
+                                <img
+                                    src="@/assets/images/share-icon.svg"
+                                    alt="share"
+                                    class="w-8 h-8 drop-shadow"
+                                />
+                                <span class="text-xs font-semibold drop-shadow">Share</span>
                             </button>
                         </div>
                     </div>
@@ -111,156 +155,4 @@ onMounted(() => {
     </div>
 </template>
 
-<style lang="scss" scoped>
-.container {
-    height: 100%;
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory;
-    scrollbar-width: none;
-    background-color: #000;
-    .reelz {
-        position: relative;
-        height: 100%;
-        scroll-snap-align: start;
-
-        video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .overlay {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: flex-end;
-            background: linear-gradient(
-                to top,
-                rgba(0, 0, 0, 1) 0%,
-                rgba(0, 0, 0, 0.5) 35%,
-                rgba(0, 0, 0, 0.15) 50%,
-                transparent 100%
-            );
-
-            .bottom {
-                width: 100%;
-                display: flex;
-                align-items: flex-end;
-                justify-content: space-between;
-                padding: 0 16px 20px;
-                gap: 12px;
-            }
-
-            .content {
-                flex: 1;
-                min-width: 0;
-                display: flex;
-                flex-direction: column;
-                gap: 6px;
-                color: #fff;
-
-                .handle {
-                    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
-                }
-
-                .tags {
-                    display: flex;
-                    flex-wrap: wrap;
-                    gap: 6px;
-
-                    span {
-                        font-size: 14px;
-                        font-weight: 600;
-                        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
-                    }
-                }
-
-                .music {
-                    display: flex;
-                    align-items: center;
-                    gap: 6px;
-                    margin-top: 2px;
-                    overflow: hidden;
-
-                    .music-icon {
-                        width: 14px;
-                        height: 14px;
-                        flex-shrink: 0;
-                        opacity: 0.9;
-                    }
-
-                    .music-title {
-                        font-size: 13px;
-                        white-space: nowrap;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        opacity: 0.9;
-                    }
-                }
-            }
-
-            .actions {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 20px;
-                flex-shrink: 0;
-
-                .avatar-wrap {
-                    position: relative;
-                    margin-bottom: 4px;
-
-                    .avatar {
-                        width: 46px;
-                        height: 46px;
-                        border-radius: 50%;
-                        border: 2px solid #fff;
-                        object-fit: cover;
-                        display: block;
-                    }
-
-                    .follow-btn {
-                        position: absolute;
-                        bottom: -10px;
-                        left: 50%;
-                        transform: translateX(-50%);
-                        width: 20px;
-                        height: 20px;
-                        border-radius: 50%;
-                        background: #ea4359;
-                        color: #fff;
-                        font-size: 16px;
-                        line-height: 18px;
-                        text-align: center;
-                        font-weight: 700;
-                    }
-                }
-
-                .action-btn {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    gap: 4px;
-                    background: none;
-                    border: none;
-                    cursor: pointer;
-                    color: #fff;
-                    padding: 0;
-
-                    img {
-                        width: 32px;
-                        height: 32px;
-                        filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.5));
-                    }
-
-                    span {
-                        font-size: 12px;
-                        font-weight: 600;
-                        filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.5));
-                    }
-                }
-            }
-        }
-    }
-}
-</style>
+<style scoped></style>
